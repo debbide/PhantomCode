@@ -10,6 +10,7 @@ services:
     volumes:
       - ./workspace:/home/coder/project
       - ./config:/root/.local/share/code-server
+      - ./ccr-config:/root/.claude-code-router
     restart: unless-stopped
     # Using root user to allow arbitrary installs inside the container
     user: root
