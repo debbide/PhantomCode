@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  phantom-ide:
+    build: .
+    container_name: phantom-code
+    ports:
+      - "8080:8080"
+    volumes:
+      - workspace-data:/home/coder/project
+      - config-data:/root/.local/share/code-server
+    restart: unless-stopped
+    # Using root user to allow arbitrary installs inside the container
+    user: root
+
+volumes:
+  workspace-data:
+  config-data:
