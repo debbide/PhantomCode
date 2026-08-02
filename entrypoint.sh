@@ -6,8 +6,8 @@ echo "[PhantomCode] Initializing PhantomCode Environment..."
 # 1. Start claude-code-router in the background
 # The 'ccr start' command runs the router on port 3456 and Web UI on 3458
 echo "[PhantomCode] Starting claude-code-router..."
-# We run it with nohup to keep it running
-nohup ccr start > /var/log/ccr.log 2>&1 &
+# We run it with nohup to keep it running and bind to 0.0.0.0 so it can be accessed from outside the container!
+nohup ccr start --host 0.0.0.0 > /var/log/ccr.log 2>&1 &
 
 # Give the router a moment to spin up
 sleep 2
