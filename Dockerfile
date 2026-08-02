@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM node:22-bookworm-slim
 
 # Prevent interactive prompts during apt installs
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,12 +21,6 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install claude-code-router globally via npm
-# Using a specific modern node version is recommended, but ubuntu's default node might be old.
-# Let's upgrade nodejs first just in case
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest
-
 RUN npm install -g @musistudio/claude-code-router
 
 # Set environment variables to use Microsoft's official marketplace
