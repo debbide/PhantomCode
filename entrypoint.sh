@@ -44,4 +44,5 @@ echo "[PhantomCode] Starting code-server Web IDE..."
 # 3. Start code-server in the foreground, listening on all interfaces
 # --auth none because we assume local/safe usage or reverse proxy wrapper.
 # If you want password protection, remove --auth none and code-server will generate a password in ~/.config/code-server/config.yaml
-exec code-server --bind-addr 0.0.0.0:8080 --auth none .
+# We add --cert to force HTTPS (self-signed), which is REQUIRED for modern browsers to load code-server's Service Workers without a blank screen
+exec code-server --bind-addr 0.0.0.0:8080 --auth none --cert .

@@ -6,6 +6,7 @@ services:
     container_name: phantom-code
     ports:
       - "8080:8080"
+      - "3458:3458"
     volumes:
       - ./workspace:/home/coder/project
       - ./config:/root/.local/share/code-server
