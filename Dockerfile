@@ -23,6 +23,16 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 # Install claude-code-router globally via npm
 RUN npm install -g @musistudio/claude-code-router
 
+# PULL VSDA FROM OFFICIAL VS CODE SERVER TO FIX CLAUDE/COPILOT PLUGINS!
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then VSCODE_ARCH="x64"; elif [ "$ARCH" = "aarch64" ]; then VSCODE_ARCH="arm64"; else VSCODE_ARCH="armhf"; fi && \
+    curl -fsSL "https://update.code.visualstudio.com/latest/server-linux-${VSCODE_ARCH}/stable" -o /tmp/vscode-server.tar.gz && \
+    mkdir -p /tmp/vscode-server && \
+    tar -xzf /tmp/vscode-server.tar.gz -C /tmp/vscode-server --strip-components=1 && \
+    mkdir -p /usr/lib/code-server/lib/vscode/node_modules/vsda && \
+    cp -r /tmp/vscode-server/node_modules/vsda/* /usr/lib/code-server/lib/vscode/node_modules/vsda/ && \
+    rm -rf /tmp/vscode-server*
+
 # Set environment variables to use Microsoft's official marketplace
 # This is REQUIRED to find the official Claude plugin in the extensions view
 ENV EXTENSIONS_GALLERY='{"serviceUrl":"https://marketplace.visualstudio.com/_apis/public/gallery","cacheUrl":"https://vscode.blob.core.windows.net/gallery/index","itemUrl":"https://marketplace.visualstudio.com/items","controlUrl":"","recommendationsUrl":""}'
