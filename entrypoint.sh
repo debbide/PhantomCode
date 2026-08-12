@@ -31,7 +31,7 @@ mkdir -p "$USER_DATA_DIR"
 
 SETTINGS_FILE="$USER_DATA_DIR/settings.json"
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo "{}" > "$SETTINGS_FILE"
+    echo '{"claudeCode.environmentVariables": ["ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY"]}' > "$SETTINGS_FILE"
 fi
 
 # Pre-install the official Claude extension if it's not already installed
