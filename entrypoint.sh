@@ -17,6 +17,7 @@ sleep 2
 # The official Claude VS Code extension looks at the ANTHROPIC_BASE_URL env var or settings.
 # We will inject this globally for the container!
 export ANTHROPIC_BASE_URL="http://127.0.0.1:3456"
+export ANTHROPIC_API_KEY="sk-phantom-dummy"
 
 # Inject into bashrc so terminal sessions get it too (for Claude Code CLI)
 if ! grep -q "ANTHROPIC_BASE_URL" /root/.bashrc; then
