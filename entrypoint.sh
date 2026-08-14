@@ -42,6 +42,26 @@ fi
 echo "[PhantomCode] Installing official Claude extension..."
 code-server --install-extension anthropic.claude-code || true
 
+# Inject configuration for the official OpenAI Codex extension
+CODEX_CONFIG_DIR="/root/.codex"
+mkdir -p "$CODEX_CONFIG_DIR"
+CODEX_CONFIG_FILE="$CODEX_CONFIG_DIR/config.toml"
+
+if [ ! -f "$CODEX_CONFIG_FILE" ]; then
+    echo '[model_providers.custom]' > "$CODEX_CONFIG_FILE"
+    echo 'name = "LocalRouter"' >> "$CODEX_CONFIG_FILE"
+    echo 'base_url = "http://127.0.0.1:3456/v1"' >> "$CODEX_CONFIG_FILE"
+    echo 'wire_api = "responses"' >> "$CODEX_CONFIG_FILE"
+    echo 'requires_openai_auth = false' >> "$CODEX_CONFIG_FILE"
+    echo 'experimental_bearer_token = "sk-ant-yNLBcUkbtb9bYQqaYQf3_FBg3SNsCB9IUEQ_6idRY90"' >> "$CODEX_CONFIG_FILE"
+    echo '' >> "$CODEX_CONFIG_FILE"
+    echo 'model_provider = "custom"' >> "$CODEX_CONFIG_FILE"
+    echo 'model = "gpt-4o"' >> "$CODEX_CONFIG_FILE"
+fi
+
+echo "[PhantomCode] Installing official OpenAI Codex extension..."
+code-server --install-extension openai.chatgpt || true
+
 # Add proxy config to VS Code settings to make sure the router UI works well
 # (Optional tweak, code-server proxies out of the box anyway)
 
