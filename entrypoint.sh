@@ -57,6 +57,7 @@ if [ ! -f "$CODEX_CONFIG_FILE" ]; then
     echo '' >> "$CODEX_CONFIG_FILE"
     echo 'model_provider = "custom"' >> "$CODEX_CONFIG_FILE"
     echo 'model = "gpt-4o"' >> "$CODEX_CONFIG_FILE"
+    echo 'preferred_auth_method = "apikey"' >> "$CODEX_CONFIG_FILE"
 fi
 
 echo "[PhantomCode] Installing official OpenAI Codex extension..."
