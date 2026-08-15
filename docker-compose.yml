@@ -3,6 +3,7 @@ version: '3.8'
 services:
   phantom-ide:
     build: .
+    image: ghcr.io/debbide/phantomcode:latest
     container_name: phantom-code
     ports:
       - "8080:8080"
