@@ -31,10 +31,10 @@ mkdir -p "$USER_DATA_DIR"
 
 SETTINGS_FILE="$USER_DATA_DIR/settings.json"
 if [ ! -f "$SETTINGS_FILE" ]; then
-    echo '{"claudeCode.environmentVariables": ["ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY"]}' > "$SETTINGS_FILE"
+    echo '{"claudeCode.environmentVariables": ["ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY"], "terminal.integrated.defaultProfile.linux": "bash", "terminal.integrated.shellIntegration.enabled": true}' > "$SETTINGS_FILE"
 else
     # Ensure existing settings have the required environment variables whitelist
-    jq '. + {"claudeCode.environmentVariables": ["ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY"]}' "$SETTINGS_FILE" > /tmp/settings.json && mv /tmp/settings.json "$SETTINGS_FILE"
+    jq '. + {"claudeCode.environmentVariables": ["ANTHROPIC_BASE_URL", "ANTHROPIC_API_KEY"], "terminal.integrated.defaultProfile.linux": "bash", "terminal.integrated.shellIntegration.enabled": true}' "$SETTINGS_FILE" > /tmp/settings.json && mv /tmp/settings.json "$SETTINGS_FILE"
 fi
 
 # Pre-install the official Claude extension if it's not already installed
